@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Lora', Georgia, serif;
+
+  --color-base:         #0d0d0d;
+  --color-surface:      #141414;
+  --color-card:         #1a1a1a;
+  --color-border:       #262626;
+  --color-muted:        #555555;
+  --color-subtle:       #888888;
+  --color-text:         #e8e3dc;
+  --color-amber:        #c9933a;
+  --color-amber-light:  #e0b060;
+  --color-amber-dim:    #7a5520;
+}
