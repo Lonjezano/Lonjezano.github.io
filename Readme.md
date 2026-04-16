@@ -8,12 +8,12 @@ Personal portfolio website built as a static single-page application, hosted on 
 
 ## Stack
 
-| Tool | Purpose |
-|------|---------|
-| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling, compiled locally via CLI |
-| [Alpine.js v3](https://alpinejs.dev) | Reactivity, section filtering, scroll tracking |
-| [@alpinejs/intersect](https://alpinejs.dev/plugins/intersect) | Scroll-triggered reveal animations |
-| [Google Fonts](https://fonts.google.com) | Syne (display) · JetBrains Mono (mono) · Lora (body) |
+| Tool                                                          | Purpose                                              |
+| ------------------------------------------------------------- | ---------------------------------------------------- |
+| [Tailwind CSS v4](https://tailwindcss.com)                    | Utility-first styling, compiled locally via CLI      |
+| [Alpine.js v3](https://alpinejs.dev)                          | Reactivity, section filtering, scroll tracking       |
+| [@alpinejs/intersect](https://alpinejs.dev/plugins/intersect) | Scroll-triggered reveal animations                   |
+| [Google Fonts](https://fonts.google.com)                      | Syne (display) · JetBrains Mono (mono) · Lora (body) |
 
 No build framework. No bundler. Just a compiled CSS file and a single HTML file.
 
@@ -26,6 +26,7 @@ portfolio/
 ├── index.html          # Single-page application
 ├── app.css             # Tailwind source + custom theme (@theme)
 ├── styles.css          # Compiled output — generated, do not edit manually
+├── favicon.png
 ├── package.json
 ├── package-lock.json
 ├── .gitignore
@@ -117,14 +118,14 @@ Custom colours and fonts are defined in `app.css` under `@theme`. After any chan
 
 ## Sections
 
-| # | Section | Description |
-|---|---------|-------------|
-| 01 | Hero | Name, role, positioning statement, CTA buttons |
-| 02 | About | Bio, quick stats (years, systems shipped, languages) |
-| 03 | Skills | Grouped by category with hover effects |
-| 04 | Experience | Timeline of work history with bullet achievements |
-| 05 | Projects | Filterable cards (Professional / Academic / Personal) |
-| 06 | Contact | Email, LinkedIn, GitHub links |
+| #   | Section    | Description                                           |
+| --- | ---------- | ----------------------------------------------------- |
+| 01  | Hero       | Name, role, positioning statement, CTA buttons        |
+| 02  | About      | Bio, quick stats (years, systems shipped, languages)  |
+| 03  | Skills     | Grouped by category with hover effects                |
+| 04  | Experience | Timeline of work history with bullet achievements     |
+| 05  | Projects   | Filterable cards (Professional / Academic / Personal) |
+| 06  | Contact    | Email, LinkedIn, GitHub links                         |
 
 ---
 
