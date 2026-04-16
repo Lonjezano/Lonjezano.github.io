@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lonjezo Chingayipe — Software Engineer</title>
+  <title>Lonjezo Chingayipe, Software Engineer</title>
   <meta name="description" content="Software engineer with 5+ years building enterprise systems in health sciences and education. Based in Blantyre, Malawi." />
   <link rel="stylesheet" href="styles.css" />
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.11/dist/cdn.min.js"></script>
@@ -12,190 +12,284 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
+    /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; }
+
+    /* ── CSS custom properties, used throughout via var() so kept here ── */
     :root {
       --bg: #f5f3ef; --surface: #ece9e3; --card: #ffffff;
       --border: #ddd9d0; --muted: #a09890; --subtle: #6b6460;
       --text: #1a1614; --coral: #c94b3a; --coral-light: #e06858;
       --coral-dim: #8b3328; --coral-tint: #c94b3a12;
     }
+
     html { background: var(--bg); color: var(--text); }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); }
+
+    /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--coral); }
     ::selection { background: var(--coral-tint); color: var(--coral); }
 
-    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes slideIn { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
-    .reveal { opacity: 0; }
-    .reveal.show { animation: fadeUp 0.65s ease forwards; }
-    .reveal-slide { opacity: 0; }
-    .reveal-slide.show { animation: slideIn 0.6s ease forwards; }
-    .delay-100{animation-delay:.1s} .delay-200{animation-delay:.2s}
-    .delay-300{animation-delay:.3s} .delay-400{animation-delay:.4s}
-    .delay-500{animation-delay:.5s} .delay-600{animation-delay:.6s}
+    /* ── Reveal animations ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideIn  { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+    .reveal             { opacity: 0; }
+    .reveal.show        { animation: fadeUp  0.65s ease forwards; }
+    .reveal-slide       { opacity: 0; }
+    .reveal-slide.show  { animation: slideIn 0.60s ease forwards; }
+    .delay-100 { animation-delay:.1s } .delay-200 { animation-delay:.2s }
+    .delay-300 { animation-delay:.3s } .delay-400 { animation-delay:.4s }
+    .delay-500 { animation-delay:.5s } .delay-600 { animation-delay:.6s }
 
+    /* ── Nav dot, CSS var + rotate can't be done purely in Tailwind ── */
     .nav-dot { width:8px; height:8px; background:var(--border); border-radius:0; transition:all .3s; }
     .nav-dot.active { background:var(--coral); transform:rotate(45deg); }
 
-    .section-num { font-family:'DM Mono',monospace; font-size:.7rem; color:var(--coral); letter-spacing:.2em; }
+    /* ── Accent elements that reference CSS vars ── */
+    .section-num  { font-family:'DM Mono',monospace; font-size:.7rem; color:var(--coral); letter-spacing:.2em; }
+    .accent-hr    { border:none; height:2px; background:var(--coral); width:3rem; margin:0; }
+    .fancy-hr     { border:none; height:1px; background:var(--border); margin:0; }
 
-    .skill-tag { border:1px solid var(--border); color:var(--subtle); font-family:'DM Mono',monospace; font-size:.7rem; padding:.3rem .8rem; transition:all .2s; cursor:default; background:transparent; }
+    /* ── Skill tag, pseudo-class hover with CSS vars ── */
+    .skill-tag {
+      border:1px solid var(--border); color:var(--subtle);
+      font-family:'DM Mono',monospace; font-size:.7rem;
+      padding:.3rem .8rem; transition:all .2s; cursor:default; background:transparent;
+    }
     .skill-tag:hover { background:var(--coral-tint); border-color:var(--coral); color:var(--coral); }
 
-    .card { background:var(--card); border:1px solid var(--border); padding:1.75rem; transition:all .3s; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+    /* ── Card, box-shadow and hover transform can't be done with vanilla Tailwind v4 here ── */
+    .card {
+      background:var(--card); border:1px solid var(--border);
+      padding:1.75rem; transition:all .3s; box-shadow:0 1px 3px rgba(0,0,0,.06);
+    }
     .card:hover { box-shadow:0 8px 30px rgba(0,0,0,.1); transform:translateY(-2px); border-color:var(--coral); }
 
-    .contact-row { display:flex; align-items:center; gap:1rem; border:1px solid var(--border); padding:1.25rem 1.5rem; transition:all .2s; text-decoration:none; background:var(--card); }
+    /* ── Contact row ── */
+    .contact-row {
+      display:flex; align-items:center; gap:1rem;
+      border:1px solid var(--border); padding:1.25rem 1.5rem;
+      transition:all .2s; text-decoration:none; background:var(--card);
+    }
     .contact-row:hover { border-color:var(--coral); box-shadow:0 4px 16px rgba(201,75,58,.1); }
 
-    .fancy-hr { border:none; height:1px; background:var(--border); margin:0; }
-    .accent-hr { border:none; height:2px; background:var(--coral); width:3rem; margin:0; }
-
-    .btn-primary { background:var(--coral); color:white; font-family:'DM Mono',monospace; font-size:.75rem; padding:.75rem 1.75rem; cursor:pointer; transition:all .2s; border:none; letter-spacing:.05em; }
+    /* ── Buttons ── */
+    .btn-primary {
+      background:var(--coral); color:white;
+      font-family:'DM Mono',monospace; font-size:.75rem;
+      padding:.75rem 1.75rem; cursor:pointer; transition:all .2s;
+      border:none; letter-spacing:.05em;
+    }
     .btn-primary:hover { background:var(--coral-light); box-shadow:0 4px 16px rgba(201,75,58,.3); }
-    .btn-secondary { background:transparent; border:1px solid var(--border); color:var(--subtle); font-family:'DM Mono',monospace; font-size:.75rem; padding:.75rem 1.75rem; transition:all .2s; letter-spacing:.05em; }
+    .btn-secondary {
+      background:transparent; border:1px solid var(--border);
+      color:var(--subtle); font-family:'DM Mono',monospace;
+      font-size:.75rem; padding:.75rem 1.75rem; transition:all .2s; letter-spacing:.05em;
+    }
     .btn-secondary:hover { border-color:var(--coral); color:var(--text); }
 
-    .timeline-dot { position:absolute; left:-1.55rem; top:.6rem; width:1rem; height:1rem;}
+    /* ── Timeline ── */
+    .timeline-dot  { position:absolute; left:-1.55rem; top:.6rem; width:1rem; height:1rem; }
     .timeline-line { position:absolute; left:-1.1rem; top:1.4rem; bottom:-1.5rem; width:1px; background:var(--border); }
     .timeline-item:last-child .timeline-line { display:none; }
 
+    /* ── Responsive: hide side nav on mobile ── */
     @media(max-width:768px) { .fixed-nav { display:none; } }
   </style>
 </head>
+
 <body x-data="portfolio()">
 
-  <!-- Side nav -->
+  <!-- ══ SIDE NAV ══ -->
   <nav class="fixed-nav fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
     <template x-for="(section,i) in sections" :key="i">
-      <button @click="scrollTo(section.id)" :title="section.label" class="nav-dot transition-all duration-300" :class="{'active':activeSection===section.id}"></button>
+      <button
+        @click="scrollTo(section.id)"
+        :title="section.label"
+        class="nav-dot transition-all duration-300"
+        :class="{'active': activeSection === section.id}">
+      </button>
     </template>
   </nav>
 
-  <!-- Top nav -->
-  <header class="fixed top-0 left-0 right-0 z-40 border-b backdrop-blur-sm" style="border-color:var(--border);background:rgba(245,243,239,0.92)">
+  <!-- ══ TOP NAV ══ -->
+  <header class="fixed top-0 left-0 right-0 z-40 border-b backdrop-blur-sm"
+          style="border-color:var(--border); background:rgba(245,243,239,0.92)">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <span style="font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--coral)">L.C.</span>
+      <span class="font-serif text-lg italic" style="color:var(--coral)">L.C.</span>
       <div class="hidden md:flex items-center gap-8">
         <template x-for="section in sections" :key="section.id">
-          <button @click="scrollTo(section.id)" style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;transition:color .2s" class="hover:text-coral" x-text="section.label"></button>
+          <button
+            @click="scrollTo(section.id)"
+            class="font-mono text-xs tracking-widest uppercase transition-colors"
+            style="color:var(--muted)"
+            x-text="section.label">
+          </button>
         </template>
       </div>
       <a href="mailto:chingalonje@gmail.com" class="btn-primary">Hire Me</a>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section id="hero" class="min-h-screen flex items-center pt-16" style="position:relative;overflow:hidden">
-    <!-- Large decorative number -->
-    <div class="absolute right-0 top-0 pointer-events-none select-none hidden lg:block" style="font-family:'Playfair Display',serif;font-size:32rem;font-weight:900;color:var(--border);line-height:1;opacity:.4;transform:translateX(20%)">&lt;/&gt;</div>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <!-- Decorative large glyph, font-size:32rem not in Tailwind scale, must stay -->
+    <div class="absolute right-0 top-0 pointer-events-none select-none hidden lg:block font-serif font-black leading-none opacity-40"
+         style="font-size:32rem; color:var(--border); transform:translateX(20%)">&lt;/&gt;</div>
 
     <div class="max-w-6xl mx-auto px-6 w-full py-24 relative z-10">
+
       <div class="reveal mb-4">
-        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--coral);letter-spacing:.3em;text-transform:uppercase;border:1px solid var(--coral);padding:.25rem .75rem">Software Engineer</span>
+        <span class="font-mono text-xs tracking-[.3em] uppercase border px-3 py-1"
+              style="color:var(--coral); border-color:var(--coral)">Software Engineer</span>
       </div>
-      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(3rem,9vw,7rem);font-weight:900;line-height:1;color:var(--text);margin:1.5rem 0 2rem" class="reveal delay-100">
+
+      <!-- clamp() font-size has no Tailwind equivalent, must stay in style -->
+      <h1 class="font-serif font-black leading-none mb-8 reveal delay-100"
+          style="font-size:clamp(3rem,9vw,7rem); color:var(--text)">
         Lonjezo<br/>
         <em style="color:var(--coral)">Chingayipe</em>
       </h1>
-      <div style="width:3rem;height:2px;background:var(--coral);margin-bottom:2rem" class="reveal delay-200"></div>
-      <p style="max-width:500px;font-family:'DM Sans',sans-serif;color:var(--subtle);font-size:1.1rem;line-height:1.8;margin-bottom:2.5rem" class="reveal delay-300">
-        Building enterprise systems that replace manual processes and serve thousands of users. Based in Blantyre, Malawi — open to remote and international opportunities.
+
+      <div class="w-12 h-0.5 mb-8 reveal delay-200" style="background:var(--coral)"></div>
+
+      <p class="max-w-lg font-sans text-lg leading-relaxed mb-10 reveal delay-300" style="color:var(--subtle)">
+        Building enterprise systems that replace manual processes and serve thousands of users.
+        Based in Blantyre, Malawi, open to remote and international opportunities.
       </p>
+
       <div class="flex flex-wrap gap-3 reveal delay-400">
         <button @click="scrollTo('projects')" class="btn-primary">View Projects →</button>
         <a href="https://github.com/Lonjezano" target="_blank" rel="noopener" class="btn-secondary">GitHub</a>
         <a href="https://www.linkedin.com/in/lonjezano/" target="_blank" rel="noopener" class="btn-secondary">LinkedIn</a>
       </div>
-      <div class="flex items-center gap-2 reveal delay-500" style="margin-top:3rem">
-        <span style="width:.5rem;height:.5rem;background:#16a34a;border-radius:50%"></span>
-        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted)">Available for freelance & remote roles</span>
+
+      <div class="flex items-center gap-2 mt-12 reveal delay-500">
+        <span class="w-2 h-2 rounded-full bg-green-600"></span>
+        <span class="font-mono text-xs" style="color:var(--muted)">Available for freelance &amp; remote roles</span>
       </div>
+
     </div>
   </section>
   <hr class="fancy-hr" />
 
-  <!-- About -->
+
+  <!-- ══ ABOUT ══ -->
   <section id="about" class="py-28">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid md:grid-cols-[1fr_2fr] gap-16">
+
         <div class="reveal-slide">
           <p class="section-num mb-2">01</p>
           <hr class="accent-hr mb-4" />
-          <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--text);line-height:1.2">The person<br/>behind<br/><em style="color:var(--coral)">the code</em></h2>
+          <h2 class="font-serif text-4xl font-bold leading-snug" style="color:var(--text)">
+            The person<br/>behind<br/><em style="color:var(--coral)">the code</em>
+          </h2>
         </div>
-        <div style="display:flex;flex-direction:column;gap:1.25rem">
-          <p style="font-family:'DM Sans',sans-serif;color:var(--subtle);font-size:1.05rem;line-height:1.85" class="reveal delay-100">Software engineer with over five years of experience building and maintaining enterprise-grade web applications in academic and commercial environments. Work focuses on systems that replace manual institutional processes — from paper-based admissions to fragmented authentication.</p>
-          <p style="font-family:'DM Sans',sans-serif;color:var(--subtle);font-size:1.05rem;line-height:1.85" class="reveal delay-200">At Kamuzu University of Health Sciences, delivered production systems used institution-wide: admissions platform, centralised SSO, grant management, research conference platform, and more. Lead development end-to-end — from database design through deployment.</p>
-          <p style="font-family:'DM Sans',sans-serif;color:var(--subtle);font-size:1.05rem;line-height:1.85" class="reveal delay-300">BSc in ICT from Mzuzu University. Pursuing graduate study in health informatics and e-learning for resource-limited settings. Actively learning Japanese.</p>
+
+        <div class="flex flex-col gap-5">
+          <p class="font-sans text-lg leading-relaxed reveal delay-100" style="color:var(--subtle)">
+            Software engineer with over five years of experience building and maintaining enterprise-grade
+            web applications in academic and commercial environments. Work focuses on systems that replace
+            manual institutional processes, from paper-based admissions to fragmented authentication.
+          </p>
+          <p class="font-sans text-lg leading-relaxed reveal delay-200" style="color:var(--subtle)">
+            At Kamuzu University of Health Sciences, delivered production systems used institution-wide:
+            admissions platform, centralised SSO, grant management, research conference platform, and more.
+            Lead development end-to-end, from database design through deployment.
+          </p>
+          <p class="font-sans text-lg leading-relaxed reveal delay-300" style="color:var(--subtle)">
+            BSc in ICT from Mzuzu University. Pursuing graduate study in health informatics and e-learning
+            for resource-limited settings. Actively learning Japanese.
+          </p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 reveal delay-400">
             <template x-for="fact in facts" :key="fact.label">
-              <div style="border-top:2px solid var(--coral);padding-top:1rem">
-                <p style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--text)" x-text="fact.value"></p>
-                <p style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:.25rem;text-transform:uppercase;letter-spacing:.1em" x-text="fact.label"></p>
+              <div class="pt-4 border-t-2" style="border-color:var(--coral)">
+                <p class="font-serif text-3xl font-bold" style="color:var(--text)" x-text="fact.value"></p>
+                <p class="font-mono text-xs mt-1 uppercase tracking-widest" style="color:var(--muted)" x-text="fact.label"></p>
               </div>
             </template>
           </div>
         </div>
+
       </div>
     </div>
   </section>
   <hr class="fancy-hr" />
 
-  <!-- Skills -->
+
+  <!-- ══ SKILLS ══ -->
   <section id="skills" class="py-28" style="background:var(--surface)">
     <div class="max-w-6xl mx-auto px-6">
+
       <div class="mb-14 reveal">
         <p class="section-num mb-2">02</p>
         <hr class="accent-hr mb-4" />
-        <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--text)">Technical <em style="color:var(--coral)">toolkit</em></h2>
+        <h2 class="font-serif text-4xl font-bold" style="color:var(--text)">
+          Technical <em style="color:var(--coral)">toolkit</em>
+        </h2>
       </div>
-      <div style="display:flex;flex-direction:column;gap:2rem">
+
+      <div class="flex flex-col gap-8">
         <template x-for="(group,i) in skills" :key="group.category">
           <div class="reveal">
-            <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem" x-text="group.category"></p>
-            <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+            <p class="font-mono text-xs tracking-[.2em] uppercase mb-3" style="color:var(--muted)" x-text="group.category"></p>
+            <div class="flex flex-wrap gap-2">
               <template x-for="skill in group.items" :key="skill">
-                <span class="skill-tag" x-text="skill"></span>
+                <span class="skill-tag rounded-full " x-text="skill"></span>
               </template>
             </div>
           </div>
         </template>
       </div>
+
     </div>
   </section>
   <hr class="fancy-hr" />
 
-  <!-- Experience -->
+
+  <!-- ══ EXPERIENCE ══ -->
   <section id="experience" class="py-28">
     <div class="max-w-6xl mx-auto px-6">
+
       <div class="mb-14 reveal">
         <p class="section-num mb-2">03</p>
         <hr class="accent-hr mb-4" />
-        <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--text)">Work <em style="color:var(--coral)">history</em></h2>
+        <h2 class="font-serif text-4xl font-bold" style="color:var(--text)">
+          Work <em style="color:var(--coral)">history</em>
+        </h2>
       </div>
-      <div style="padding-left:1.5rem;display:flex;flex-direction:column;gap:2.5rem">
-        <template x-for="(job,i) in experience" :key="job.company">
-          <div class="reveal" style="position:relative">
-            <div class="timeline-line"></div>
-            <svg class="timeline-dot" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
-</svg>
 
-            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;margin-bottom:.75rem">
+      <div class="pl-6 flex flex-col gap-10" >
+        <template x-for="(job,i) in experience" :key="job.company">
+          <div class="relative reveal">
+            <div class="timeline-line"></div>
+            <svg class="timeline-dot" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                 stroke-width="1.5" stroke="currentColor" style="color:var(--coral)">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+
+            <div class="flex flex-wrap justify-between gap-2 mb-3">
               <div>
-                <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:600;color:var(--text)" x-text="job.role"></h3>
-                <a :href="job.url" target="_blank" rel="noopener" style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--coral);text-decoration:none" x-text="job.company"></a>
-                <span style="font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);margin-left:.5rem" x-text="job.location"></span>
+                <h3 class="font-serif text-lg font-semibold" style="color:var(--text)" x-text="job.role"></h3>
+                <a :href="job.url" target="_blank" rel="noopener"
+                   class="font-mono text-xs no-underline" style="color:var(--coral)"
+                   x-text="job.company"></a>
+                <span class="font-mono text-xs ml-2" style="color:var(--muted)" x-text="job.location"></span>
               </div>
-              <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);border:1px solid var(--border);padding:.2rem .75rem;align-self:flex-start" x-text="job.period"></span>
+              <span class="font-mono text-xs border rounded-full px-3 py-1 self-start"
+                    style="color:var(--muted); border-color:var(--border)"
+                    x-text="job.period"></span>
             </div>
-            <ul style="display:flex;flex-direction:column;gap:.6rem">
+
+            <ul class="flex flex-col gap-2">
               <template x-for="point in job.points" :key="point">
-                <li style="display:flex;gap:.75rem;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--subtle);line-height:1.7">
-                  <i class="fa-solid fa-caret-right" style="color:var(--coral);flex-shrink:0;margin-top:4px;font-size:.7rem"></i>
+                <li class="flex gap-3 font-sans text-sm leading-relaxed" style="color:var(--subtle)">
+                  <i class="fa-solid fa-caret-right shrink-0 mt-1 text-xs" style="color:var(--coral)"></i>
                   <span x-text="point"></span>
                 </li>
               </template>
@@ -203,190 +297,294 @@
           </div>
         </template>
       </div>
+
     </div>
   </section>
   <hr class="fancy-hr" />
 
-  <!-- Projects -->
+
+  <!-- ══ PROJECTS ══ -->
   <section id="projects" class="py-28" style="background:var(--surface)">
     <div class="max-w-6xl mx-auto px-6">
+
       <div class="mb-14 reveal">
         <p class="section-num mb-2">04</p>
         <hr class="accent-hr mb-4" />
-        <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;color:var(--text)">Selected <em style="color:var(--coral)">work</em></h2>
+        <h2 class="font-serif text-4xl font-bold" style="color:var(--text)">
+          Selected <em style="color:var(--coral)">work</em>
+        </h2>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2rem" class="reveal delay-100">
+
+      <!-- Filter tabs -->
+      <div class="flex flex-wrap gap-3 mb-10 reveal delay-100">
         <template x-for="group in projectGroups" :key="group">
-          <button @click="activeGroup=group; reObserve()"
-            class="rounded-full px-6"
-            :style="activeGroup===group ? 'background:var(--coral);color:white;border:1px solid var(--coral)' : 'background:transparent;border:1px solid var(--border);color:var(--muted)'"
-            style="font-family:'DM Mono',monospace;font-size:.7rem;padding:.4rem 1.1rem;cursor:pointer;transition:all .2s"
-            x-text="group"></button>
+          <button
+            @click="activeGroup=group; reObserve()"
+            class="rounded-full font-mono text-xs px-5 py-1.5 cursor-pointer transition-all"
+            :style="activeGroup===group
+              ? 'background:var(--coral); color:white; border:1px solid var(--coral)'
+              : 'background:transparent; border:1px solid var(--border); color:var(--muted)'"
+            x-text="group">
+          </button>
         </template>
       </div>
+
+      <!-- Cards -->
       <div class="grid md:grid-cols-2 gap-5">
         <template x-for="(project,i) in filteredProjects" :key="project.title">
           <div class="card reveal">
-            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
-              <div style="display:flex;align-items:center;gap:.5rem">
-                <span style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--coral);letter-spacing:.15em;text-transform:uppercase" x-text="project.group"></span>
+
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs tracking-widest uppercase" style="color:var(--coral)" x-text="project.group"></span>
                 <template x-if="project.internal">
-                  <span style="border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:.6rem;padding:.1rem .4rem">Internal</span>
+                  <span class="font-mono text-xs border rounded-full px-1.5 py-0.5"
+                        style="border-color:var(--border); color:var(--muted)">Internal</span>
                 </template>
               </div>
               <template x-if="project.url">
-                <a :href="project.url" target="_blank" rel="noopener" style="color:var(--muted);transition:color .2s;text-decoration:none;font-size:.85rem" class="hover:text-coral">
+                <a :href="project.url" target="_blank" rel="noopener"
+                   class="text-sm no-underline transition-colors" style="color:var(--muted)">
                   <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
               </template>
             </div>
-            <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.5rem" x-text="project.title"></h3>
-            <p style="font-family:'DM Sans',sans-serif;font-size:.875rem;color:var(--subtle);line-height:1.75;margin-bottom:1rem" x-text="project.description"></p>
-            <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+
+            <h3 class="font-serif text-lg font-semibold mb-2" style="color:var(--text)" x-text="project.title"></h3>
+            <p class="font-sans text-sm leading-relaxed mb-4" style="color:var(--subtle)" x-text="project.description"></p>
+
+            <div class="flex flex-wrap gap-1.5">
               <template x-for="tech in project.stack" :key="tech">
-                <span class="rounded-full" style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);border:1px solid var(--border);padding:.2rem .5rem;background:var(--surface)" x-text="tech"></span>
+                <span class="rounded-full font-mono text-xs border px-2 py-0.5"
+                      style="color:var(--muted); border-color:var(--border); background:var(--surface)"
+                      x-text="tech"></span>
               </template>
             </div>
-            <p style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--border);margin-top:.75rem" x-text="project.year"></p>
+
+            <p class="font-mono text-xs mt-4" style="color:var(--border)" x-text="project.year"></p>
           </div>
         </template>
       </div>
+
     </div>
   </section>
   <hr class="fancy-hr" />
 
-  <!-- Contact -->
+
+  <!-- ══ CONTACT ══ -->
   <section id="contact" class="py-28">
     <div class="max-w-6xl mx-auto px-6">
-      <div style="max-width:600px">
+      <div class="max-w-xl">
+
         <p class="section-num reveal mb-2">05</p>
         <hr class="accent-hr reveal mb-6" />
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--text);line-height:1.15;margin-bottom:1.5rem" class="reveal delay-100">
+
+        <!-- clamp() has no Tailwind equivalent, must stay in style -->
+        <h2 class="font-serif font-bold leading-tight mb-6 reveal delay-100"
+            style="font-size:clamp(2rem,5vw,3.5rem); color:var(--text)">
           Let's build something<br/><em style="color:var(--coral)">worth using.</em>
         </h2>
-        <p style="font-family:'DM Sans',sans-serif;color:var(--subtle);font-size:1rem;line-height:1.8;margin-bottom:2.5rem" class="reveal delay-200">Open to senior developer roles, remote opportunities, international positions, and freelance projects. Reach out directly — I respond promptly.</p>
-        <div style="display:flex;flex-direction:column;gap:.75rem" class="reveal delay-300">
-          <a href="mailto:chingalonje@gmail.com" class="contact-row" style="color:inherit">
-            <div style="width:2.5rem;height:2.5rem;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--coral);font-size:1rem">
+
+        <p class="font-sans text-base leading-relaxed mb-10 reveal delay-200" style="color:var(--subtle)">
+          Open to senior developer roles, remote opportunities, international positions, and freelance
+          projects. Reach out directly, I respond promptly.
+        </p>
+
+        <div class="flex flex-col gap-3 reveal delay-300">
+
+          <a href="mailto:chingalonje@gmail.com" class="contact-row">
+            <div class="w-10 h-10 border flex items-center justify-center text-base"
+                 style="border-color:var(--border); color:var(--coral)">
               <i class="fa-solid fa-envelope"></i>
             </div>
             <div>
-              <p style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase">Email</p>
-              <p style="font-family:'DM Sans',sans-serif;color:var(--text);font-size:.95rem">chingalonje@gmail.com</p>
+              <p class="font-mono text-xs tracking-widest uppercase" style="color:var(--muted)">Email</p>
+              <p class="font-sans text-base" style="color:var(--text)">chingalonje@gmail.com</p>
             </div>
-            <i class="fa-solid fa-chevron-right ml-auto" style="color:var(--border);font-size:.7rem"></i>
+            <i class="fa-solid fa-chevron-right ml-auto text-xs" style="color:var(--border)"></i>
           </a>
-          <a href="https://www.linkedin.com/in/lonjezano/" target="_blank" rel="noopener" class="contact-row" style="color:inherit">
-            <div style="width:2.5rem;height:2.5rem;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--coral);font-size:1rem">
+
+          <a href="https://www.linkedin.com/in/lonjezano/" target="_blank" rel="noopener" class="contact-row">
+            <div class="w-10 h-10 border flex items-center justify-center text-base"
+                 style="border-color:var(--border); color:var(--coral)">
               <i class="fa-brands fa-linkedin-in"></i>
             </div>
             <div>
-              <p style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase">LinkedIn</p>
-              <p style="font-family:'DM Sans',sans-serif;color:var(--text);font-size:.95rem">in/lonjezano</p>
+              <p class="font-mono text-xs tracking-widest uppercase" style="color:var(--muted)">LinkedIn</p>
+              <p class="font-sans text-base" style="color:var(--text)">in/lonjezano</p>
             </div>
-            <i class="fa-solid fa-chevron-right ml-auto" style="color:var(--border);font-size:.7rem"></i>
+            <i class="fa-solid fa-chevron-right ml-auto text-xs" style="color:var(--border)"></i>
           </a>
-          <a href="https://github.com/Lonjezano" target="_blank" rel="noopener" class="contact-row" style="color:inherit">
-            <div style="width:2.5rem;height:2.5rem;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--coral);font-size:1rem">
+
+          <a href="https://github.com/Lonjezano" target="_blank" rel="noopener" class="contact-row">
+            <div class="w-10 h-10 border flex items-center justify-center text-base"
+                 style="border-color:var(--border); color:var(--coral)">
               <i class="fa-brands fa-github"></i>
             </div>
             <div>
-              <p style="font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase">GitHub</p>
-              <p style="font-family:'DM Sans',sans-serif;color:var(--text);font-size:.95rem">github.com/Lonjezano</p>
+              <p class="font-mono text-xs tracking-widest uppercase" style="color:var(--muted)">GitHub</p>
+              <p class="font-sans text-base" style="color:var(--text)">github.com/Lonjezano</p>
             </div>
-            <i class="fa-solid fa-chevron-right ml-auto" style="color:var(--border);font-size:.7rem"></i>
+            <i class="fa-solid fa-chevron-right ml-auto text-xs" style="color:var(--border)"></i>
           </a>
+
         </div>
-        <p style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:2rem" class="reveal delay-400">
-          <i class="fa-solid fa-location-dot" style="color:var(--coral);margin-right:.4rem"></i>Blantyre, Malawi &nbsp;·&nbsp; Open to remote worldwide
+
+        <p class="font-mono text-xs mt-8 reveal delay-400" style="color:var(--muted)">
+          <i class="fa-solid fa-location-dot mr-1.5" style="color:var(--coral)"></i>
+          Blantyre, Malawi &nbsp;·&nbsp; Open to remote worldwide
         </p>
+
       </div>
     </div>
   </section>
 
-  <footer style="border-top:1px solid var(--border);padding:2rem 0;background:var(--surface)">
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="border-t py-8" style="border-color:var(--border); background:var(--surface)">
     <div class="max-w-6xl mx-auto px-6 flex flex-wrap items-center justify-between gap-4">
-      <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted)">© 2026 Lonjezo Chingayipe</span>
-      <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--border)">Built with Tailwind + Alpine.js</span>
+      <span class="font-mono text-xs" style="color:var(--muted)">© 2026 Lonjezo Chingayipe</span>
+      <span class="font-mono text-xs" style="color:var(--border)">Built with Tailwind + Alpine.js</span>
     </div>
   </footer>
 
+
+  <!-- ══ ALPINE DATA ══ -->
   <script>
     function portfolio() {
       return {
-        activeSection:'hero', activeGroup:'All',
-        sections:[
-          {id:'hero',label:'Home'},{id:'about',label:'About'},{id:'skills',label:'Skills'},
-          {id:'experience',label:'Experience'},{id:'projects',label:'Projects'},{id:'contact',label:'Contact'},
+        activeSection: 'hero',
+        activeGroup:   'All',
+
+        sections: [
+          { id:'hero',       label:'Home'       },
+          { id:'about',      label:'About'      },
+          { id:'skills',     label:'Skills'     },
+          { id:'experience', label:'Experience' },
+          { id:'projects',   label:'Projects'   },
+          { id:'contact',    label:'Contact'    },
         ],
-        scrollTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});},
-        init(){
-          // Section tracking
+
+        scrollTo(id) {
+          document.getElementById(id)?.scrollIntoView({ behavior:'smooth' });
+        },
+
+        init() {
+          /* ── Section tracking ── */
           const sObs = new IntersectionObserver(
             entries => entries.forEach(e => { if (e.isIntersecting) this.activeSection = e.target.id; }),
             { threshold: 0.3 }
           );
-          this.sections.forEach(s => { const el = document.getElementById(s.id); if (el) sObs.observe(el); });
+          this.sections.forEach(s => {
+            const el = document.getElementById(s.id);
+            if (el) sObs.observe(el);
+          });
 
-          // Reveal observer stored on instance so MutationObserver can reuse it
+          /* ── Reveal observer ── */
           this._rObs = new IntersectionObserver(
             entries => entries.forEach(e => {
-              if (e.isIntersecting) { e.target.classList.add('show'); this._rObs.unobserve(e.target); }
+              if (e.isIntersecting) {
+                e.target.classList.add('show');
+                this._rObs.unobserve(e.target);
+              }
             }),
             { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
           );
 
-          // Attach to any unobserved reveal elements present right now
           const attachReveals = () => {
-            document.querySelectorAll('.reveal:not(.show), .reveal-slide:not(.show)').forEach(el => {
-              this._rObs.observe(el);
-            });
+            document.querySelectorAll('.reveal:not(.show), .reveal-slide:not(.show)')
+              .forEach(el => this._rObs.observe(el));
           };
 
-          // MutationObserver catches new elements added by x-for on every render cycle
+          /* MutationObserver catches new elements added by x-for on every render cycle */
           this._mObs = new MutationObserver(() => attachReveals());
           this._mObs.observe(document.body, { childList: true, subtree: true });
 
-          // Run once after Alpine finishes the initial render
+          /* Run once after Alpine finishes the initial render */
           this.$nextTick(() => attachReveals());
         },
-        reObserve(){
-          // Called by project filter tabs after activeGroup changes
+
+        reObserve() {
           this.$nextTick(() => {
-            document.querySelectorAll('.reveal:not(.show), .reveal-slide:not(.show)').forEach(el => {
-              this._rObs.observe(el);
-            });
+            document.querySelectorAll('.reveal:not(.show), .reveal-slide:not(.show)')
+              .forEach(el => this._rObs.observe(el));
           });
         },
-        facts:[{value:'5+',label:'Years exp'},{value:'8+',label:'Systems'},{value:'2',label:'Languages'},{value:'MSc',label:'Target'}],
-        skills:[
-          {category:'Languages',items:['PHP','Python','JavaScript','Java','Kotlin','C#','C++','HTML','CSS']},
-          {category:'Frameworks & Libraries',items:['Laravel','Livewire','Laminas','Django','React','Node.js','Bootstrap','Tailwind CSS','Scrapy','Kivy','.NET']},
-          {category:'Databases',items:['MySQL','PostgreSQL','MongoDB']},
-          {category:'Tools & Platforms',items:['Git','Docker','Linux','Figma','WordPress (Divi)','VS Code','IntelliJ IDEA']},
-          {category:'Soft Skills',items:['Analytical Thinking','Problem-Solving','Collaboration','Adaptability','Active Listening']},
+
+        facts: [
+          { value:'5+',  label:'Years exp'  },
+          { value:'8+',  label:'Systems'    },
+          { value:'2',   label:'Languages'  },
+          { value:'MSc', label:'Target'     },
         ],
-        experience:[
-          {role:'System Development and Support Officer',company:'Kamuzu University of Health Sciences',url:'https://www.kuhes.ac.mw/',location:'Blantyre, MW',period:'07/2022 — Present',points:['Designed and built the KUHeS Admissions System (2023), then independently refactored the entire codebase in 2026 — redesigning the database schema, overhauling the UI, and introducing report generation, batch downloads, and parallel processing — replacing a fully paper-based process and reducing manual admissions workload by up to 40%.','Engineered a centralised SSO system adopted across all internal university platforms, eliminating siloed authentication and enabling seamless access from a single login.','Delivered four additional production systems: RDC platform, Grant-Hub, Workflow Automation System, and a public health information website.','Serve as technical support lead for assigned faculties within SARIS, resolving bugs, supporting exam management, and handling student queries.']},
-          {role:'Software Developer',company:'Ctech Systems Limited',url:'https://www.ctech.mw/',location:'Lilongwe, MW',period:'03/2021 — 03/2022',points:["Developed USSD and SMS applications using Django with Africa's Talking APIs.",'Built automated web scraping tools for structured data extraction.','Managed deployment and hosting across production servers.']},
-          {role:'Assistant IT Officer',company:'LUANAR',url:'https://luanar.ac.mw/',location:'Lilongwe, MW',period:'04/2022 — 06/2022',points:['Provided first-line IT support to staff and students, resolving hardware and peripheral issues.','Assisted with server administration including backup management and system restarts.']},
-          {role:'IT Intern',company:'Mhub',url:'https://mhubmw.com/',location:'Lilongwe, MW',period:'08/2019 — 10/2019',points:['Configured and deployed portable Keepod drives with bootable Linux environments for underserved communities.']},
+
+        skills: [
+          { category:'Languages',              items:['PHP','Python','JavaScript','Java','Kotlin','C#','C++','HTML','CSS'] },
+          { category:'Frameworks & Libraries', items:['Laravel','Livewire','Laminas','Django','React','Node.js','Bootstrap','Tailwind CSS','Scrapy','Kivy','.NET'] },
+          { category:'Databases',              items:['MySQL','PostgreSQL','MongoDB'] },
+          { category:'Tools & Platforms',      items:['Git','Docker','Linux','Figma','WordPress (Divi)','VS Code','IntelliJ IDEA'] },
+          { category:'Soft Skills',            items:['Analytical Thinking','Problem-Solving','Collaboration','Adaptability','Active Listening'] },
         ],
-        projectGroups:['All','Professional','Academic','Personal'],
-        projects:[
-          {group:'Professional',title:'KUHeS Admissions System',description:'Online admissions platform replacing a fully paper-based process. Refactored solo in 2026 with new DB schema, improved UI, report generation, and batch/parallel downloads.',stack:['PHP (Laravel)','Livewire','MySQL','JavaScript'],url:'https://admissions.kuhes.ac.mw/',internal:false,year:'2023—2026'},
-          {group:'Professional',title:'KUHeS SSO System',description:'Centralised authentication backbone for all internal KUHeS platforms. Single login grants access to every connected institutional application.',stack:['PHP (Laravel)','MySQL','JavaScript'],url:null,internal:true,year:'2024'},
-          {group:'Professional',title:'KUHeS RDC System',description:'Event and abstract management for the university\'s annual research conference. Registrations, submissions, peer review, and dissemination.',stack:['PHP (Laravel)','JavaScript'],url:'https://rdc.kuhes.ac.mw/',internal:false,year:'2024'},
-          {group:'Professional',title:'KUHeS Grant-Hub',description:'Internal grant management tracking research grant lifecycles — submissions, approvals, and reporting across departments.',stack:['PHP (Laravel)','MySQL','JavaScript'],url:null,internal:true,year:'2024'},
-          {group:'Professional',title:'KUHeS Workflow System',description:'Digital workflow automation streamlining administrative and approval processes institution-wide.',stack:['PHP (Laravel)','JavaScript'],url:null,internal:true,year:'2023'},
-          {group:'Professional',title:'Adolescent Health Malawi',description:'Public health information platform improving access to adolescent health resources in Malawi.',stack:['PHP','JavaScript','WordPress (Divi)','Figma'],url:'https://adolescentwellbeingmalawi.org/',internal:false,year:'2024'},
-          {group:'Professional',title:'Ctech SMS/USSD App',description:"SMS and USSD platform via Africa's Talking API extending digital services to users without internet access.",stack:['Python (Django)','JavaScript'],url:null,internal:true,year:'2021'},
-          {group:'Academic',title:'Mzuzu University Nav System',description:'Final year capstone: Python mobile navigation app for a university campus using OpenStreetMap and Graphhopper API with graph traversal algorithms.',stack:['Python (Kivy)','KivyMD','OpenStreetMap','Graphhopper'],url:null,internal:false,year:'2020'},
-          {group:'Personal',title:'Web Scraper Toolkit',description:'Automated scraping tool for structured data extraction enabling research and analytics.',stack:['Python (Django)','Scrapy','JavaScript'],url:null,internal:false,year:'2021'},
+
+        experience: [
+          {
+            role:'System Development and Support Officer', company:'Kamuzu University of Health Sciences',
+            url:'https://www.kuhes.ac.mw/', location:'Blantyre, MW', period:'07/2022 — Present',
+            points:[
+              'Designed and built the KUHeS Admissions System (2023), then independently refactored the entire codebase in 2026, redesigning the database schema, overhauling the UI, and introducing report generation, batch downloads, and parallel processing, replacing a fully paper-based process and reducing manual admissions workload by up to 40%.',
+              'Engineered a centralised SSO system adopted across all internal university platforms, eliminating siloed authentication and enabling seamless access from a single login.',
+              'Delivered four additional production systems: RDC platform, Grant-Hub, Workflow Automation System, and a public health information website.',
+              'Serve as technical support lead for assigned faculties within SARIS, resolving bugs, supporting exam management, and handling student queries.',
+            ],
+          },
+          {
+            role:'Software Developer', company:'Ctech Systems Limited',
+            url:'https://www.ctech.mw/', location:'Lilongwe, MW', period:'03/2021 — 03/2022',
+            points:[
+              "Developed USSD and SMS applications using Django with Africa's Talking APIs.",
+              'Built automated web scraping tools for structured data extraction.',
+              'Managed deployment and hosting across production servers.',
+            ],
+          },
+          {
+            role:'Assistant IT Officer', company:'LUANAR',
+            url:'https://luanar.ac.mw/', location:'Lilongwe, MW', period:'04/2022 — 06/2022',
+            points:[
+              'Provided first-line IT support to staff and students, resolving hardware and peripheral issues.',
+              'Assisted with server administration including backup management and system restarts.',
+            ],
+          },
+          {
+            role:'IT Intern', company:'Mhub',
+            url:'https://mhubmw.com/', location:'Lilongwe, MW', period:'08/2019 — 10/2019',
+            points:[
+              'Configured and deployed portable Keepod drives with bootable Linux environments for underserved communities.',
+            ],
+          },
         ],
-        get filteredProjects(){return this.activeGroup==='All'?this.projects:this.projects.filter(p=>p.group===this.activeGroup);},
+
+        projectGroups: ['All','Professional','Academic','Personal'],
+
+        projects: [
+          { group:'Professional', title:'KUHeS Admissions System',     description:'Online admissions platform replacing a fully paper-based process. Refactored solo in 2026 with new DB schema, improved UI, report generation, and batch/parallel downloads.',       stack:['PHP (Laravel)','Livewire','MySQL','JavaScript (Apline Js)'],       url:'https://admissions.kuhes.ac.mw/', internal:false, year:'2023 — 2026' },
+          { group:'Professional', title:'KUHeS SSO System',            description:'Centralised authentication backbone for all internal KUHeS platforms. Single login grants access to every connected institutional application.',                                  stack:['PHP (Laravel)','MySQL','JavaScript (Apline Js)'],                  url:null,                              internal:true,  year:'2026'      },
+          { group:'Professional', title:'KUHeS RDC System',            description:"Event and abstract management for the university's annual research conference. Registrations, submissions, peer review, and dissemination.",                                       stack:['PHP (Laravel)','Livewire','MySQL','JavaScript (Apline Js)'],                          url:'https://rdc.kuhes.ac.mw/',        internal:false, year:'2024 - 2026'      },
+          { group:'Professional', title:'KUHeS Grant-Hub',             description:'Internal grant management tracking research grant lifecycles, submissions, approvals, and reporting across departments.',                                                         stack:['PHP (Laravel)','Livewire','MySQL','JavaScript (Apline Js)'],                  url:null,                              internal:true,  year:'2025'      },
+          { group:'Professional', title:'KUHeS Workflow System',       description:'Digital workflow automation streamlining administrative and approval processes institution-wide.',                                                                                 stack:['PHP (Laravel)','JavaScript (JQuery)'],                          url:null,                              internal:true,  year:'2023'      },
+          { group:'Professional', title:'Adolescent Health Malawi',    description:'Public health information platform improving access to adolescent health resources in Malawi.',                                                                                   stack:['PHP','JavaScript','WordPress (Divi)','Figma'],          url:'https://adolescentwellbeingmalawi.org/', internal:false, year:'2024' },
+          { group:'Professional', title:'Ctech SMS/USSD App',          description:"SMS and USSD platform via Africa's Talking API extending digital services to users without internet access.",                                                                     stack:['Python (Django)','JavaScript'],                        url:null,                              internal:true,  year:'2021'      },
+          { group:'Academic',     title:'Mzuzu University Nav System', description:'Final year capstone: Python mobile navigation app for a university campus using OpenStreetMap and Graphhopper API with graph traversal algorithms.',                              stack:['Python (Kivy)','KivyMD','OpenStreetMap','Graphhopper'], url:null,                              internal:false, year:'2020'      },
+          { group:'Personal',     title:'Web Scraper Toolkit',         description:'Automated scraping tool for structured data extraction enabling research and analytics.',                                                                                         stack:['Python (Django)','Scrapy','JavaScript'],               url:null,                              internal:false, year:'2021'      },
+        ],
+
+        get filteredProjects() {
+          return this.activeGroup === 'All'
+            ? this.projects
+            : this.projects.filter(p => p.group === this.activeGroup);
+        },
       };
     }
   </script>
+
 </body>
 </html>
